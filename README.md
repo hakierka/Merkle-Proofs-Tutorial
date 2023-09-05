@@ -2,10 +2,10 @@
 This repository contains a simple tutorial and code examples to help you understand and implement Merkle Proofs using JavaScript/TypeScript. Merkle Proofs are a fundamental concept in cryptography and blockchain technology for efficiently verifying data integrity.
 ## Table of Contents
 
-- [Introduction](##introduction)
-- [Prerequisites](##prerequisites)
-- [Getting Started](##getting-started)
-- [Code Overview](##code-overview)
+- [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
+- [Getting Started](#getting-started)
+- [Code Overview](#code-overview)
 
 ## Introduction
 
