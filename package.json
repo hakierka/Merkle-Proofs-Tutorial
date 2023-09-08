@@ -1,0 +1,20 @@
+{
+  "name": "merkle-proofs-tutorial",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hakierka/Merkle-Proofs-Tutorial.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hakierka/Merkle-Proofs-Tutorial/issues"
+  },
+  "homepage": "https://github.com/hakierka/Merkle-Proofs-Tutorial#readme"
+}
