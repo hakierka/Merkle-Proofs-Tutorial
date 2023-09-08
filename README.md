@@ -20,7 +20,7 @@ Now, let's dive into a practical scenario: using Merkle Proofs to whitelist emai
 
 #### Step 1: Create Leaves
 
-In JavaScript/TypeScript, you'd kick off by creating leaf nodes for each email address. We're going to hash them for added secrecy.
+In JavaScript/TypeScript, you'd start by creating leaf nodes for each email address:
 ```
 const crypto = require('crypto');
 
@@ -35,22 +35,22 @@ const hashEmail3 = crypto.createHash('sha256').update(email3).digest('hex');
 const leaves = [hashEmail1, hashEmail2, hashEmail3];`
 ```
 #### Step 2: Build the Merkle Tree
-
-Next, we build the Merkle Tree from these leaves. For simplicity, we'll use a library like `merkle-tree-solidity`.
+Next, you'd build the Merkle Tree from these leaves. For simplicity, we'll use a library like  `merkle-tree-solidity` to do this:
 ```
 const MerkleTree = require('merkle-tree-solidity');
 
 const tree = new MerkleTree(leaves);
 const root = tree.getRoot().toString('hex');
 ```
-The `root` now contains the magical root hash of the Merkle Tree.
+The `root` now contains the root hash of the Merkle Tree.
 #### Step 3: Generate the Merkle Proof
 
 To prove that an email address is whitelisted, you need to generate a Merkle Proof. For example, to prove amy@example.com is in the whitelist:
 ```
 const proof = tree.getProof(leaves[0]);
 ```
-The `proof` contains all the secret sauce you need to prove membership.
+
+The `proof` contains the necessary information to prove the membership of `amy@example.com`.
 
 #### Step 4: Verify the Proof
 
@@ -59,7 +59,7 @@ Finally, to check if an email address is whitelisted, someone can use the proof 
 const verificationResult = tree.verify(proof, leaves[0], root);
 console.log('Is smy@example.com whitelisted?', verificationResult); // Should be true
 ```
-And voila! That's how Merkle Proofs work for email whitelisting. You can now prove your membership without showing off the entire guest list.
+And that's how Merkle Proofs work for email whitelisting! You can now prove membership without revealing the entire whitelist.
 
 ### Wrapping up
 
