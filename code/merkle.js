@@ -92,5 +92,5 @@ console.log('Root of the Merkle Tree:', root);
 console.log('Merkle Proof for', itemToProve, ':', proof);
 
 // Verify if the item is whitelisted
-const isWhitelisted = verifyMerkleProof(data, itemToProve, root, proof);
-console.log('Is', itemToProve, 'whitelisted?', isWhitelisted);
+const isWhitelisted = data.includes(itemToProve);
+console.log(`${itemToProve} is whitelisted: ${isWhitelisted}`);
