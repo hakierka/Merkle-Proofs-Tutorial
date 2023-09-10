@@ -1,20 +1,12 @@
 {
-  "name": "merkle-proofs-tutorial",
+  "name": "Merkle-Proofs-Tutorial",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A demonstration of Merkle Proofs in JavaScript",
+  "main": "code/merkle.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node code/merkle.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hakierka/Merkle-Proofs-Tutorial.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hakierka/Merkle-Proofs-Tutorial/issues"
-  },
-  "homepage": "https://github.com/hakierka/Merkle-Proofs-Tutorial#readme"
+  "dependencies": {
+    "crypto-js": "^4.1.1"
+  }
 }
