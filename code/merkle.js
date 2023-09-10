@@ -64,6 +64,25 @@ function generateMerkleProof(data, item) {
   return proof;
 }
 
+// Function to verify a Merkle Proof.
+function verifyMerkleProof(data, item, root, proof) {
+  const calculatedRoot = createMerkleTree(data);
+
+  // Compare the calculated root with the provided root.
+  if (calculatedRoot === root) {
+    // If they match, the item is whitelisted.
+    return true;
+  } else {
+    // If they don't match, verify the proof.
+    const proofHash = proof.reduce((currentHash, siblingHash) => {
+      return calculateMerkleHash(currentHash, siblingHash);
+    }, crypto.SHA256(item).toString());
+
+    // If the proofHash matches the root, the item is whitelisted.
+    return proofHash === root;
+  }
+}
+
 // Example usage:
 const root = createMerkleTree(data);
 const itemToProve = 'amy@example.com';
@@ -71,3 +90,7 @@ const proof = generateMerkleProof(data, itemToProve);
 
 console.log('Root of the Merkle Tree:', root);
 console.log('Merkle Proof for', itemToProve, ':', proof);
+
+// Verify if the item is whitelisted
+const isWhitelisted = verifyMerkleProof(data, itemToProve, root, proof);
+console.log('Is', itemToProve, 'whitelisted?', isWhitelisted);
