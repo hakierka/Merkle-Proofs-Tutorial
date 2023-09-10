@@ -1,69 +1,38 @@
 # Merkle-Proofs-Tutorial
-This repository contains a simple tutorial and code examples to help you understand and implement Merkle Proofs using JavaScript/TypeScript. Merkle Proofs are a fundamental concept in cryptography and blockchain technology for efficiently verifying data integrity.
+In this tutorial, we will delve into the world of Merkle Proofs, a cryptographic technique essential for data verification in various decentralized systems, including blockchain technologies. We'll cover the following topics:
+1. **Merkle Trees**: A foundation for Merkle Proofs.
+2. **How Merkle Proofs Work**: Efficiently proving data membership.
+3. **Practical Implementation** in JavaScript.
 ## Table of Contents
 
 - [Introduction](#introduction)
+- [How Merkle Proofs Work](#how-merkle-proofs-work)
 - [Prerequisites](#prerequisites)
-- [Getting Started](#getting-started)
-- [Code Overview](#code-overview)
+- [Practical Implementation](#practical-implementation)
+- [Conclusion](#conclusion)
+- [Other files](#other-files)
 
 ## Introduction
-
+### Merkle Trees: The Foundation
+#### What are Merkle Trees?
+Before we dive into Merkle Proofs, it's crucial to grasp the concept of Merkle Trees. Named after Ralph Merkle, they are binary tree structures designed for efficient data integrity verification in large datasets.
 ### Exploring Merkle Proofs: Secure Membership Verification
 Merkle Proofs are like the secret sauce of data integrity, letting us prove something's in a big collection without giving away the whole stash. Imagine you want to check if your name's on a guest list, but you don't want to see the entire list – Merkle Proofs make it happen.
 
-### Unveiling Merkle Trees
+In a Merkle Tree:
 
-But first, let's get to know Merkle Trees. Picture a tree where each leaf holds a piece of data, and every other node is a cryptic blend of its children. It's a hierarchy of information, just like the family tree on your wall, but with cryptographic superpowers.
+- Each leaf node represents a piece of data (e.g., a transaction in a blockchain).
+- Each non-leaf (internal) node is a cryptographic hash of its child nodes.
+  
+## How Merkle Proofs Work
 
-Now, let's dive into a practical scenario: using Merkle Proofs to whitelist email addresses.
+### Proving Data Membership Efficiently
 
-#### Step 1: Create Leaves
+Merkle Proofs allow you to prove the existence of a specific item in a dataset without revealing the entire dataset. The process involves:
 
-In JavaScript/TypeScript, you'd start by creating leaf nodes for each email address:
-```
-const crypto = require('crypto');
-
-const email1 = 'amy@example.com';
-const email2 = 'jenna@example.com';
-const email3 = 'tanay@example.com';
-
-const hashEmail1 = crypto.createHash('sha256').update(email1).digest('hex');
-const hashEmail2 = crypto.createHash('sha256').update(email2).digest('hex');
-const hashEmail3 = crypto.createHash('sha256').update(email3).digest('hex');
-
-const leaves = [hashEmail1, hashEmail2, hashEmail3];`
-```
-#### Step 2: Build the Merkle Tree
-Next, you'd build the Merkle Tree from these leaves. For simplicity, we'll use a library like  `merkle-tree-solidity` to do this:
-```
-const MerkleTree = require('merkle-tree-solidity');
-
-const tree = new MerkleTree(leaves);
-const root = tree.getRoot().toString('hex');
-```
-The `root` now contains the root hash of the Merkle Tree.
-#### Step 3: Generate the Merkle Proof
-
-To prove that an email address is whitelisted, you need to generate a Merkle Proof. For example, to prove amy@example.com is in the whitelist:
-```
-const proof = tree.getProof(leaves[0]);
-```
-
-The `proof` contains the necessary information to prove the membership of `amy@example.com`.
-
-#### Step 4: Verify the Proof
-
-Finally, to check if an email address is whitelisted, someone can use the proof and the root:
-```
-const verificationResult = tree.verify(proof, leaves[0], root);
-console.log('Is smy@example.com whitelisted?', verificationResult); // Should be true
-```
-And that's how Merkle Proofs work for email whitelisting! You can now prove membership without revealing the entire whitelist.
-
-### Wrapping up
-
-Merkle Proofs are the guardians of data integrity, ensuring everything's secure and trustworthy in a world of massive datasets. They're the secret handshake of the blockchain and decentralized systems, making sure only the right people get through the door.
+1. **Creating a Merkle Tree**: Construct a Merkle Tree from your dataset by hashing each data item and building the tree structure.
+2. **Generating a Proof**: To prove the existence of a specific item, generate a Merkle Proof for that item. The proof consists of a series of sibling hashes along the path from the item to the root of the tree.
+3. **Verification**: Anyone with access to the Merkle Tree and the Merkle Proof can reconstruct the path from the item to the root, verifying its authenticity.
 
 ## Prerequisites
 
@@ -71,27 +40,61 @@ Before you begin, ensure you have the following:
 
 - Node.js and npm (Node Package Manager) installed on your system.
 
-## Getting Started
+## Practical Implementation
 
-1. Clone this repository to your local machine:
-   ```bash
-   git clone <repository_url>
-   ```
-2. Navigate to the repository directory:
-   ```bash
-   cd Merkle-Proofs-Tutorial
-   ```
-3 Clone this repository to your local machine:
-  ```bash
-  npm install
+### Code Structure
+
+In this repository, you'll find two main files:
+
+- `merkle.js`: Contains the JavaScript/TypeScript code to create a Merkle Tree and generate Merkle Proofs.
+- `other-files.js`: Contains helper functions and classes used in `merkle.js`.
+
+### Usage
+
+To use the code, follow these steps:
+
+1. Clone this repository to your local machine.
 ```
-4. Explore the merkle.js and other-files.js files to understand the code.
+git clone https://github.com/hakierka/Merkle-Proofs-Tutorial.git
+```
+2. Navigate to the project directory.
+```
+cd Merkle-Proofs-Tutorial
+```
+3. Install the required dependencies 
+```
+npm install
+```
+4. Modify the data array in `merkle.js` to include the data items you want to use.
+5. Run the code to create a Merkle Tree and generate Merkle Proofs.
+```
+npm start
+```
 
-## Code Overview
-### merkle.js
-This file contains JavaScript/TypeScript code that demonstrates the creation of a Merkle Tree, generation of Merkle Proofs, and verification of these proofs. It includes functions to calculate hashes, build the Merkle Tree, generate proofs, and verify proofs.
+
+
+### Conclusion
+Merkle Proofs play a vital role in ensuring data integrity and membership verification without revealing the complete dataset. This tutorial provides both an explanation of the theory behind Merkle Trees and a practical implementation in JavaScript. Feel free to explore and experiment with different datasets and use cases to deepen your understanding of this cryptographic technique.
 
 Detailed explanations and comments are provided in the code to help you understand each step of the process.
 
-### other-files.js
-In this file, you can find additional code, helper functions, data structures, and configurations that complement the merkle.js code. These elements are used to improve code organization, modularity, and readability.
+### Other Files
+
+`other-files.js` is a supplementary JavaScript module designed to enhance the functionality of the Merkle Proofs Tutorial. This module provides essential helper functions, classes, and configurations used in the `merkle.js` file for creating Merkle Trees and generating Merkle Proofs.
+#### Helper Functions
+
+- **calculateMerkleHash**: Calculates the hash of two concatenated values, used in Merkle Tree construction.
+  
+#### Custom Data Structure
+
+- **MerkleProof**: A custom data structure representing a Merkle Proof. It includes methods to add proof nodes and set the root.
+  
+#### Configuration Options
+
+- **merkleConfig**: Configuration options for Merkle Proof generation. Currently, it specifies the hash algorithm used (default is 'sha256'). Additional options can be added if needed.
+  
+#### Error Handling
+
+- **handleMerkleError**: A function for handling potential errors related to Merkle Proofs.
+
+`other-files.js` serves as a valuable resource for enhancing the extensibility and clarity of your Merkle Proofs implementation.
