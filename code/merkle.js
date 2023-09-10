@@ -83,14 +83,26 @@ function verifyMerkleProof(data, item, root, proof) {
   }
 }
 
-// Example usage:
-const root = createMerkleTree(data);
-const itemToProve = 'amy@example.com';
-const proof = generateMerkleProof(data, itemToProve);
+// Define a function for demonstrating how to verify an email's whitelist status.
+function exampleUsage(email) {
+  // Create a Merkle Tree for the predefined data.
+  const root = createMerkleTree(data);
 
-console.log('Root of the Merkle Tree:', root);
-console.log('Merkle Proof for', itemToProve, ':', proof);
+  // Generate a Merkle Proof for the specified email.
+  const proof = generateMerkleProof(data, email);
 
-// Verify if the item is whitelisted
-const isWhitelisted = data.includes(itemToProve);
-console.log(`${itemToProve} is whitelisted: ${isWhitelisted}`);
+  // Log the root of the Merkle Tree.
+  console.log(`Root of the Merkle Tree: ${root}`);
+
+  // Log the Merkle Proof for the given email.
+  console.log(`Merkle Proof for ${email}:`, proof);
+
+  // Check if the provided email is whitelisted.
+  const isWhitelisted = data.includes(email);
+
+  // Log whether the email is whitelisted or not.
+  console.log(`Is ${email} whitelisted: ${isWhitelisted}`);
+}
+
+// Example: Test the function with a specific email (replace with your email).
+exampleUsage("amy@example.com");
