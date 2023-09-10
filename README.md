@@ -70,8 +70,8 @@ npm install
 ```
 npm start
 ```
-
-
+The script will calculate the Merkle Proof for the specified email and verify if it's whitelisted.
+6. View the output in the console to see if the email is whitelisted or not.
 
 ### Conclusion
 Merkle Proofs play a vital role in ensuring data integrity and membership verification without revealing the complete dataset. This tutorial provides both an explanation of the theory behind Merkle Trees and a practical implementation in JavaScript. Feel free to explore and experiment with different datasets and use cases to deepen your understanding of this cryptographic technique.
