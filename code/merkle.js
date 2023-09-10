@@ -1,8 +1,16 @@
+// Import functions and classes from other-files.js
+const {
+  calculateMerkleHash,
+  MerkleProof,
+  merkleConfig,
+  handleMerkleError,
+} = require('./other-files.js'); // Use the correct path if needed
+
 // Import a cryptographic library (e.g., crypto-js) for hashing.
 const crypto = require('crypto-js');
 
 // Sample data (email addresses).
-const data = ['alice@example.com', 'bob@example.com', 'charlie@example.com'];
+const data = ['amy@example.com', 'jenna@example.com', 'tanay@example.com'];
 
 // Function to create a Merkle Tree.
 function createMerkleTree(data) {
@@ -58,7 +66,7 @@ function generateMerkleProof(data, item) {
 
 // Example usage:
 const root = createMerkleTree(data);
-const itemToProve = 'alice@example.com';
+const itemToProve = 'amy@example.com';
 const proof = generateMerkleProof(data, itemToProve);
 
 console.log('Root of the Merkle Tree:', root);
