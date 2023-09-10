@@ -79,13 +79,13 @@ You can easily verify the membership of a different email address in the whiteli
 
 1. Open the `merkle.js` file in your project.
 
-2. Locate the following line of code:
+2. Locate the `exampleUsage` function, which is used for demonstrating how to verify email addresses:
 ```
-const itemToProve = 'amy@example.com'; // Change this email address
+function exampleUsage(email)
 ```
-3. Replace `amy@example.com` with the email address you want to verify. For example:
+3. Execute the exampleUsage function, you can change the email address to the one you want to verify:
 ```
-const itemToProve = 'greta@example.com'; // Change this email address
+exampleUsage("greta@example.com");
 ```
 4. Save the `merkle.js` file.
 5. Open your terminal and run the verification script again:
