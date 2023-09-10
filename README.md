@@ -73,6 +73,31 @@ npm start
 The script will calculate the Merkle Proof for the specified email and verify if it's whitelisted.
 6. View the output in the console to see if the email is whitelisted or not.
 
+### Verify a Different Email Address
+
+You can easily verify the membership of a different email address in the whitelist by following these steps:
+
+1. Open the `merkle.js` file in your project.
+
+2. Locate the following line of code:
+```
+const itemToProve = 'amy@example.com'; // Change this email address
+```
+3. Replace `amy@example.com` with the email address you want to verify. For example:
+```
+const itemToProve = 'greta@example.com'; // Change this email address
+```
+4. Save the `merkle.js` file.
+5. Open your terminal and run the verification script again:
+```
+npm start
+```
+6. The script will now generate a Merkle Proof and display whether the provided email address is whitelisted or not.
+
+
+This allows you to easily verify the membership of any email address within your predefined set without revealing the entire whitelist.
+
+
 ### Conclusion
 Merkle Proofs play a vital role in ensuring data integrity and membership verification without revealing the complete dataset. This tutorial provides both an explanation of the theory behind Merkle Trees and a practical implementation in JavaScript. Feel free to explore and experiment with different datasets and use cases to deepen your understanding of this cryptographic technique.
 
