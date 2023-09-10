@@ -1,108 +1,56 @@
-// Import functions and classes from other-files.js
-const {
-  calculateMerkleHash,
-  MerkleProof,
-  merkleConfig,
-  handleMerkleError,
-} = require('./other-files.js'); // Use the correct path if needed
+const crypto = require('crypto');
+const readline = require('readline');
 
-// Import a cryptographic library (e.g., crypto-js) for hashing.
-const crypto = require('crypto-js');
+// Create hashes for email addresses (whitelisted)
+const whitelistedEmails = [
+  'amy@example.com',
+  'jenna@example.com',
+  'tanay@example.com'
+];
 
-// Sample data (email addresses).
-const data = ['amy@example.com', 'jenna@example.com', 'tanay@example.com'];
+const hashedEmails = whitelistedEmails.map(email =>
+  crypto.createHash('sha256').update(email).digest('hex')
+);
 
-// Function to create a Merkle Tree.
-function createMerkleTree(data) {
-  if (data.length % 2 !== 0) {
-    // Make sure the data has an even number of elements.
-    data.push(data[data.length - 1]);
-  }
+// Construct the Merkle Tree
+const rootHash = constructMerkleTree(hashedEmails);
 
-  const tree = [];
+// Create an interface to get user input
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-  // Calculate leaf nodes (hashes of data items).
-  for (let item of data) {
-    const hash = crypto.SHA256(item).toString();
-    tree.push(hash);
-  }
+// Prompt the user for an email address to check
+rl.question('Enter the email address to check: ', (email) => {
+  const providedHash = crypto.createHash('sha256').update(email).digest('hex');
 
-  // Build the tree by hashing pairs of nodes until we have a root node.
-  while (tree.length > 1) {
-    const level = [];
-    for (let i = 0; i < tree.length; i += 2) {
-      const left = tree[i];
-      const right = tree[i + 1];
-      const combined = crypto.SHA256(left + right).toString();
-      level.push(combined);
-    }
-    tree.length = 0; // Clear the old tree level.
-    Array.prototype.push.apply(tree, level); // Add the new level.
-  }
+  // Verify the Merkle Proof
+  let currentHash = providedHash;
 
-  return tree[0]; // The root of the Merkle Tree.
-}
-
-// Function to generate a Merkle Proof for a specific data item.
-function generateMerkleProof(data, item) {
-  const index = data.indexOf(item);
-
-  if (index === -1) {
-    return null; // Item not found in the data.
-  }
-
-  const tree = createMerkleTree(data);
-  const proof = [];
-
-  let currentIndex = index;
-  for (let i = 0; i < tree.length / 2; i++) {
-    const siblingIndex = currentIndex % 2 === 0 ? currentIndex + 1 : currentIndex - 1;
-    proof.push(tree[siblingIndex]);
-    currentIndex = Math.floor(currentIndex / 2) + Math.floor(data.length / 2);
-  }
-
-  return proof;
-}
-
-// Function to verify a Merkle Proof.
-function verifyMerkleProof(data, item, root, proof) {
-  const calculatedRoot = createMerkleTree(data);
-
-  // Compare the calculated root with the provided root.
-  if (calculatedRoot === root) {
-    // If they match, the item is whitelisted.
-    return true;
+  if (hashedEmails.includes(currentHash)) {
+    console.log('Email address is whitelisted!');
   } else {
-    // If they don't match, verify the proof.
-    const proofHash = proof.reduce((currentHash, siblingHash) => {
-      return calculateMerkleHash(currentHash, siblingHash);
-    }, crypto.SHA256(item).toString());
-
-    // If the proofHash matches the root, the item is whitelisted.
-    return proofHash === root;
+    console.log('Email address is not whitelisted!');
   }
+
+  rl.close();
+});
+
+// Function to construct a Merkle Tree
+function constructMerkleTree(hashes) {
+  if (hashes.length === 1) {
+    return hashes[0];
+  }
+
+  const newHashes = [];
+
+  for (let i = 0; i < hashes.length; i += 2) {
+    const left = hashes[i];
+    const right = i + 1 < hashes.length ? hashes[i + 1] : '';
+    const combined = crypto.createHash('sha256').update(left + right).digest('hex');
+    newHashes.push(combined);
+  }
+
+  return constructMerkleTree(newHashes);
 }
-
-// Define a function for demonstrating how to verify an email's whitelist status.
-function exampleUsage(email) {
-  // Create a Merkle Tree for the predefined data.
-  const root = createMerkleTree(data);
-
-  // Generate a Merkle Proof for the specified email.
-  const proof = generateMerkleProof(data, email);
-
-  // Log the root of the Merkle Tree.
-  console.log(`Root of the Merkle Tree: ${root}`);
-
-  // Log the Merkle Proof for the given email.
-  console.log(`Merkle Proof for ${email}:`, proof);
-
-  // Check if the provided email is whitelisted.
-  const isWhitelisted = data.includes(email);
-
-  // Log whether the email is whitelisted or not.
-  console.log(`Is ${email} whitelisted: ${isWhitelisted}`);
-}
-
-// Example: Test the function with a specific email (replace with your email).
-exampleUsage("amy@example.com");
