@@ -70,8 +70,10 @@ npm start
 5. The program will prompt you to enter an email address to check if it's whitelisted.
 Enter the email address you want to verify.
 
+![Enter Image](image/enter.jpg)
 
-6. Check the Result
+
+7. Check the Result
 The program will then verify if the provided email address is whitelisted using Merkle Proofs. It will display one of the following messages:
 
 - "Email address is whitelisted!" if the email address is in the whitelist.
