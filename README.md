@@ -10,7 +10,6 @@ In this tutorial, we will delve into the world of Merkle Proofs, a cryptographic
 - [Prerequisites](#prerequisites)
 - [Practical Implementation](#practical-implementation)
 - [Conclusion](#conclusion)
-- [Other files](#other-files)
 
 ## Introduction
 ### Merkle Trees: The Foundation
@@ -44,10 +43,8 @@ Before you begin, ensure you have the following:
 
 ### Code Structure
 
-In this repository, you'll find two main files:
-
+In this repository, you'll find:
 - `merkle.js`: Contains the JavaScript/TypeScript code to create a Merkle Tree and generate Merkle Proofs.
-- `other-files.js`: Contains helper functions and classes used in `merkle.js`.
 
 ### Usage
 
@@ -61,41 +58,36 @@ git clone https://github.com/hakierka/Merkle-Proofs-Tutorial.git
 ```
 cd Merkle-Proofs-Tutorial
 ```
-3. Install the required dependencies 
+3. Customize Whitelisted Emails
+In the merkle.js file, you can customize the list of whitelisted email addresses. By default, the code whitelists three email addresses: `amy@example.com`, `jenna@example.com`, and `tanay@example.com`.
 ```
-npm install
+const whitelistedEmails = [
+  'amy@example.com',
+  'jenna@example.com',
+  'tanay@example.com'
+];
 ```
-4. Modify the data array in `merkle.js` to include the data items you want to use.
-5. Run the code to create a Merkle Tree and generate Merkle Proofs.
-```
-npm start
-```
-The script will calculate the Merkle Proof for the specified email and verify if it's whitelisted.
-6. View the output in the console to see if the email is whitelisted or not.
+Feel free to modify this array to include the email addresses you want to whitelist.
 
-### Verify a Different Email Address
+4. Install Dependencies: 
+There are no external dependencies for this code, so you don't need to install anything.
 
-You can easily verify the membership of a different email address in the whitelist by following these steps:
-
-1. Open the `merkle.js` file in your project.
-
-2. Locate the `exampleUsage` function, which is used for demonstrating how to verify email addresses:
+5. Execute the following command to run the program:
 ```
-function exampleUsage(email)
+node merkle.js
 ```
-3. Execute the exampleUsage function, you can change the email address to the one you want to verify:
-```
-exampleUsage("greta@example.com");
-```
-4. Save the `merkle.js` file.
-5. Open your terminal and run the verification script again:
-```
-npm start
-```
-6. The script will now generate a Merkle Proof and display whether the provided email address is whitelisted or not.
+6. The program will prompt you to enter an email address to check if it's whitelisted.
+Enter the email address you want to verify.
 
 
-This allows you to easily verify the membership of any email address within your predefined set without revealing the entire whitelist.
+6. Check the Result
+The program will then verify if the provided email address is whitelisted using Merkle Proofs. It will display one of the following messages:
+
+- "Email address is whitelisted!" if the email address is in the whitelist.
+- "Email address is not whitelisted!" if the email address is not in the whitelist.
+
+7. Customize Further
+If you want to add more email addresses to the whitelist or modify the code for other use cases, you can do so by editing the whitelistedEmails array and the code accordingly.
 
 
 ### Conclusion
@@ -103,23 +95,3 @@ Merkle Proofs play a vital role in ensuring data integrity and membership verifi
 
 Detailed explanations and comments are provided in the code to help you understand each step of the process.
 
-### Other Files
-
-`other-files.js` is a supplementary JavaScript module designed to enhance the functionality of the Merkle Proofs Tutorial. This module provides essential helper functions, classes, and configurations used in the `merkle.js` file for creating Merkle Trees and generating Merkle Proofs.
-#### Helper Functions
-
-- **calculateMerkleHash**: Calculates the hash of two concatenated values, used in Merkle Tree construction.
-  
-#### Custom Data Structure
-
-- **MerkleProof**: A custom data structure representing a Merkle Proof. It includes methods to add proof nodes and set the root.
-  
-#### Configuration Options
-
-- **merkleConfig**: Configuration options for Merkle Proof generation. Currently, it specifies the hash algorithm used (default is 'sha256'). Additional options can be added if needed.
-  
-#### Error Handling
-
-- **handleMerkleError**: A function for handling potential errors related to Merkle Proofs.
-
-`other-files.js` serves as a valuable resource for enhancing the extensibility and clarity of your Merkle Proofs implementation.
