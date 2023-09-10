@@ -58,7 +58,26 @@ git clone https://github.com/hakierka/Merkle-Proofs-Tutorial.git
 ```
 cd Merkle-Proofs-Tutorial
 ```
-3. Customize Whitelisted Emails
+3. Install Dependencies:
+```
+npm install
+```
+
+4. Run the script:
+```
+npm start
+```
+5. The program will prompt you to enter an email address to check if it's whitelisted.
+Enter the email address you want to verify.
+
+
+6. Check the Result
+The program will then verify if the provided email address is whitelisted using Merkle Proofs. It will display one of the following messages:
+
+- "Email address is whitelisted!" if the email address is in the whitelist.
+- "Email address is not whitelisted!" if the email address is not in the whitelist.
+
+7. Customize Whitelisted Emails
 In the merkle.js file, you can customize the list of whitelisted email addresses. By default, the code whitelists three email addresses: `amy@example.com`, `jenna@example.com`, and `tanay@example.com`.
 ```
 const whitelistedEmails = [
@@ -69,25 +88,6 @@ const whitelistedEmails = [
 ```
 Feel free to modify this array to include the email addresses you want to whitelist.
 
-4. Install Dependencies: 
-There are no external dependencies for this code, so you don't need to install anything.
-
-5. Execute the following command to run the program:
-```
-node merkle.js
-```
-6. The program will prompt you to enter an email address to check if it's whitelisted.
-Enter the email address you want to verify.
-
-
-6. Check the Result
-The program will then verify if the provided email address is whitelisted using Merkle Proofs. It will display one of the following messages:
-
-- "Email address is whitelisted!" if the email address is in the whitelist.
-- "Email address is not whitelisted!" if the email address is not in the whitelist.
-
-7. Customize Further
-If you want to add more email addresses to the whitelist or modify the code for other use cases, you can do so by editing the whitelistedEmails array and the code accordingly.
 
 
 ### Conclusion
