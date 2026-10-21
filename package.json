@@ -4,6 +4,7 @@
   "description": "A demonstration of Merkle Proofs in JavaScript",
   "main": "code/merkle.js",
   "scripts": {
-    "start": "node code/merkle.js"
+    "start": "node code/merkle.js",
+    "test": "node --test"
   }
 }
