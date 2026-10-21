@@ -6,6 +6,7 @@ const {
   whitelistedEmails,
   hashedEmails,
   rootHash,
+  merkleLevels,
   hashPair,
   getProof,
   verifyProof,
@@ -13,6 +14,10 @@ const {
 } = require('./merkle.js');
 
 describe('Merkle proofs', () => {
+  it('rootHash equals the top of merkleLevels', () => {
+    assert.equal(rootHash, merkleLevels[merkleLevels.length - 1][0]);
+  });
+
   it('every whitelisted email: proof verifies against root', () => {
     for (let i = 0; i < whitelistedEmails.length; i++) {
       const leafHash = hashedEmails[i];
