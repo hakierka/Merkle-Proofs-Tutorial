@@ -79,7 +79,7 @@ The program will then verify if the provided email address is whitelisted using 
 - "Email address is whitelisted!" if the email address is in the whitelist.
 - "Email address is not whitelisted!" if the email address is not in the whitelist.
 
-7. Customize Whitelisted Emails
+8. Customize Whitelisted Emails
 In the merkle.js file, you can customize the list of whitelisted email addresses. By default, the code whitelists three email addresses: `amy@example.com`, `jenna@example.com`, and `tanay@example.com`.
 ```
 const whitelistedEmails = [
