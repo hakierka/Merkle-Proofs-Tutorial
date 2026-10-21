@@ -5,8 +5,5 @@
   "main": "code/merkle.js",
   "scripts": {
     "start": "node code/merkle.js"
-  },
-  "dependencies": {
-    "crypto-js": "^4.1.1"
   }
 }
